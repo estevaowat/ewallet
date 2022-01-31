@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    container_name: ewallet-database
+    ports:
+      - '5465:5432'
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DATABASE=ewallet
+    volumes:
+      - /var/lib/postgresql/data:/var/lib/postgresql/data
+
+
