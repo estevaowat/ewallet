@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres
+    image: postgres:latest
     restart: always
     container_name: ewallet-database
     ports:
