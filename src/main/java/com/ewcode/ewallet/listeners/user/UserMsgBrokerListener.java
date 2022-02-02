@@ -29,6 +29,7 @@ public class UserMsgBrokerListener {
     public void save(@Payload String message) {
         System.out.println(message);
         SaveUserDto userToSave = new SaveUserDto(message, message);
+        System.out.println(message);
         userService.insertOrUpdate(userToSave);
     }
 
