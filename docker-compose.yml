@@ -13,5 +13,14 @@ services:
       - POSTGRES_DATABASE=ewallet
     volumes:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
-
+  rabbitmq:
+    image: rabbitmq:3.9-management-alpine
+    container_name: ewallet-rabbitmq
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - ~/.docker-conf/rabbitmq/data:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log:/var/log/rabbitmq
+    network_mode: "bridge"
 
