@@ -7,8 +7,6 @@ plugins {
     id 'java'
 }
 
-check.dependsOn sonarlintMain
-
 group = 'com.ewcode'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
@@ -76,4 +74,5 @@ task installGitHook(type: Copy) {
     fileMode 0775
 }
 
+check.dependsOn sonarlintMain
 build.dependsOn installGitHook
