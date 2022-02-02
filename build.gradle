@@ -2,8 +2,12 @@ plugins {
     id 'org.springframework.boot' version '2.6.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id "com.adarshr.test-logger" version "3.1.0"
+    id 'name.remal.sonarlint' version '1.5.0'
+    id 'name.remal.environment-variables' version '1.5.0'
     id 'java'
 }
+
+check.dependsOn sonarlintMain
 
 group = 'com.ewcode'
 version = '0.0.1-SNAPSHOT'
@@ -65,3 +69,11 @@ tasks.named('test') {
         logLevel 'lifecycle'
     }
 }
+
+task installGitHook(type: Copy) {
+    from new File(projectDir, '.githooks/pre-commit')
+    into { new File(projectDir, '.git/hooks') }
+    fileMode 0775
+}
+
+build.dependsOn installGitHook

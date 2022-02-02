@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User insertOrUpdate(SaveUserDto userDto) {
         Optional<User> user = repository.findByEmail(userDto.email());
-
+         
         if(user.isPresent()) {
 
             User userToUpdate = user.get();
