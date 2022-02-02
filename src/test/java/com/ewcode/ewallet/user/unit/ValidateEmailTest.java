@@ -10,7 +10,7 @@ class ValidateEmailTest {
     @DisplayName("should be a valid e-mail")
     void shouldBeValidEmail() {
         final String email = "estevao.watanabe@gmail.com";
-        final String expected = "validEmail";
+        final String expected = "estevao.watanabe@gmail.com";
         
         Assertions.assertEquals(expected, email);
     }

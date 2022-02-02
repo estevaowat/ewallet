@@ -35,10 +35,7 @@ class InsertOrUpdateTest extends TestContainer {
 
         SaveUserDto updateUserDto = new SaveUserDto("Monkey D. Rufi", "luffy@mugiwara.com");
         User updatedUser = userService.insertOrUpdate(updateUserDto);
-
-        System.out.println("updatedUser.getId() = " + updatedUser.getId());
-        System.out.println("savedUser.getId() = " + savedUser.getId());
-
+        
         Assertions.assertEquals(updatedUser.getId(), savedUser.getId());
         Assertions.assertEquals(updateUserDto.name(), updatedUser.getName());
         Assertions.assertEquals(updateUserDto.email(), updatedUser.getEmail());
