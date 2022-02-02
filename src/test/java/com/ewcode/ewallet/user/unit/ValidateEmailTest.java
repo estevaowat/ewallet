@@ -18,7 +18,7 @@ class ValidateEmailTest {
     @Test
     @DisplayName("should be a invalid e-mail")
     void shouldBeInvalidEmail() {
-        final String email = "invalidemail";
+        final String email = "invalidemail12381237192837g";
         final String expected = "estevao.watnabe@gmail.com";
 
         Assertions.assertNotEquals(expected, email);
