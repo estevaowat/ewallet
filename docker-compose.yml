@@ -5,22 +5,23 @@ services:
     image: postgres:latest
     restart: always
     container_name: ewallet-database
+    env_file:
+      - .env
     ports:
-      - '5465:5432'
-    environment:
-      - POSTGRES_USER=docker
-      - POSTGRES_PASSWORD=123456
-      - POSTGRES_DATABASE=ewallet
+      - "${POSTGRES_LOCAL_PORT}:${POSTGRES_DOCKER_PORT}"
     volumes:
-      - /var/lib/postgresql/data:/var/lib/postgresql/data
+      - data-postgres:/var/lib/postgresql/data
   rabbitmq:
     image: rabbitmq:3.9-management-alpine
     container_name: ewallet-rabbitmq
     ports:
-      - '5672:5672'
-      - '15672:15672'
+      - "${RABBITMQ_PORT}:${RABBITMQ_PORT}"
+      - "${RABBITMQ_CLIENT_PORT}:${RABBITMQ_CLIENT_PORT}"
     volumes:
       - ~/.docker-conf/rabbitmq/data:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log:/var/log/rabbitmq
     network_mode: "bridge"
 
+volumes:
+  data-postgres:
+    driver: local
