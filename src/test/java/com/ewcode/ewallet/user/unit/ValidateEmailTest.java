@@ -11,7 +11,16 @@ class ValidateEmailTest {
     void shouldBeValidEmail() {
         final String email = "estevao.watanabe@gmail.com";
         final String expected = "estevao.watanabe@gmail.com";
-        
+
         Assertions.assertEquals(expected, email);
+    }
+
+    @Test
+    @DisplayName("should be a invalid e-mail")
+    void shouldBeInvalidEmail() {
+        final String email = "invalidemail";
+        final String expected = "estevao.watnabe@gmail.com";
+
+        Assertions.assertNotEquals(expected, email);
     }
 }
