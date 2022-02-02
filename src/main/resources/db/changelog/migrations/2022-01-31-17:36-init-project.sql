@@ -1,6 +1,9 @@
 --liquibase formatted sql
 --changeset ewcode:2022-01-31-17:36-init-project splitStatements:true endDelimiter:;
 
+CREATE
+EXTENSION IF NOT EXISTS moddatetime;
+
 CREATE TABLE "user"
 (
     id         BIGSERIAL PRIMARY KEY,

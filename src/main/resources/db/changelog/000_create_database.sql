@@ -3,5 +3,4 @@
 
 CREATE DATABASE ewallet;
 
-CREATE EXTENSION moddatetime;
 
