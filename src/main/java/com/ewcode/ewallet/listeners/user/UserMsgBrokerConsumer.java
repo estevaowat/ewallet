@@ -9,11 +9,11 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMsgBrokerListener {
+public class UserMsgBrokerConsumer {
     private static final String QUEUE_USER_SAVE = "/queue/user/save";
     private final UserService userService;
 
-    public UserMsgBrokerListener(UserService userService) {
+    public UserMsgBrokerConsumer(UserService userService) {
         this.userService = userService;
     }
 
@@ -22,10 +22,7 @@ public class UserMsgBrokerListener {
         return new Queue(QUEUE_USER_SAVE, true);
     }
 
-    @RabbitListener(queues = {
-            QUEUE_USER_SAVE
-    })
-
+    @RabbitListener(queues = {QUEUE_USER_SAVE})
     public void save(@Payload String message) {
         SaveUserDto userToSave = new SaveUserDto(message, message);
         userService.insertOrUpdate(userToSave);
