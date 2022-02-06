@@ -1,6 +1,23 @@
 version: '3.8'
 
 services:
+  app:
+    container_name: consumer_ewallet
+    restart: always
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:8080"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+      - rabbitmq
+    networks:
+      - commons-api
   postgres:
     image: postgres:latest
     restart: always
@@ -11,17 +28,27 @@ services:
       - "${POSTGRES_LOCAL_PORT}:${POSTGRES_DOCKER_PORT}"
     volumes:
       - data-postgres:/var/lib/postgresql/data
+    networks:
+      - commons-api
   rabbitmq:
     image: rabbitmq:3.9-management-alpine
     container_name: ewallet-rabbitmq
+    env_file:
+      - .env
     ports:
       - "${RABBITMQ_PORT}:${RABBITMQ_PORT}"
       - "${RABBITMQ_CLIENT_PORT}:${RABBITMQ_CLIENT_PORT}"
     volumes:
       - ~/.docker-conf/rabbitmq/data:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log:/var/log/rabbitmq
-    network_mode: "bridge"
+    networks:
+      - commons-api
 
 volumes:
   data-postgres:
     driver: local
+
+networks:
+  commons-api:
+    driver: bridge
+
